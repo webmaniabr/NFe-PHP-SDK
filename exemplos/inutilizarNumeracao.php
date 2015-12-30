@@ -14,7 +14,7 @@ $settings = array(
 $webmaniabr = new NFe($settings);
 $sequencia = '101-109';
 $motivo = 'Cancelamento por motivos administrativos.';
-$response = $webmaniabr->inutilizarNumercao( $sequencia, $motivo );
+$response = $webmaniabr->inutilizarNumeracao( $sequencia, $motivo );
 
 if (isset($response->error)){
     

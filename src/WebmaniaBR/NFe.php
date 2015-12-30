@@ -56,7 +56,7 @@ class NFe {
         
     }
     
-    function inutilizarNumercao( $sequencia, $motivo ){
+    function inutilizarNumeracao( $sequencia, $motivo ){
         
         $data = array();
         $data['sequencia'] = $sequencia;
