@@ -85,8 +85,7 @@ class NFe {
         $rest = curl_init();
         curl_setopt($rest, CURLOPT_CONNECTTIMEOUT , 300); 
         curl_setopt($rest, CURLOPT_TIMEOUT, 300);
-        curl_setopt($rest, CURLOPT_URL, $endpoint);
-        //curl_setopt($rest, CURLOPT_URL, $endpoint.'?time='.time()); // Somente utilize esse $endpoint, se por alguma razão tiver problemas com Cache.
+        curl_setopt($rest, CURLOPT_URL, $endpoint.'?time='.time());
         curl_setopt($rest, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($rest, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($rest, CURLOPT_SSL_VERIFYHOST, false);
