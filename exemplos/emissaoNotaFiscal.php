@@ -18,6 +18,7 @@ $data = array(
     'ID' => 123456, // Número do pedido
     'operacao' => 1, // Tipo de Operação da Nota Fiscal
     'natureza_operacao' => 'Venda de produção do estabelecimento', // Natureza da Operação
+    'modelo' => 1, // Modelo da Nota Fiscal 
     'emissao' => 1, // Tipo de Emissão da NF-e 
     'finalidade' => 1, // Finalidade de emissão da Nota Fiscal
     'ambiente' => 1, // Identificação do Ambiente do Sefaz 
