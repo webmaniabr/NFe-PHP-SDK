@@ -97,7 +97,7 @@ if (isset($response->error)){
     $nfe = (int) $response->nfe; // número da NF-e
     $serie = (int) $response->serie; // número de série
     $recibo = (int) $response->recibo; // número do recibo
-    $chave = (int) $response->chave; // número da chave de acesso
+    $chave = $response->chave; // número da chave de acesso
     $xml = (string) $response->xml; // URL do XML
     $danfe = (string) $response->danfe; // URL do Danfe (PDF)
     $log = $response->log;
