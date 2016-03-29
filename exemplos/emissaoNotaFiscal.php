@@ -53,6 +53,7 @@ foreach($items as $item):
         'nome' => 'Camisetas Night Run', // Nome do produto
         'sku' => 'camisetas-10-milhas', // Código identificador - SKU
         'ncm' => '6109.10.00', // Código NCM
+        'cest' => '28.038.00', // Código CEST
         'quantidade' => 3, // Quantidade de itens
         'unidade' => 'UN', // Unidade de medida da quantidade de itens 
         'peso' => '0.500', // Peso em KG. Ex: 800 gramas = 0.800 KG
