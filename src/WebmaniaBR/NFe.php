@@ -13,7 +13,7 @@ class NFe {
         
     }
     
-    function statusSefaz(){
+    function statusSefaz( $data = null ){
         
         $response = self::connect_webmaniabr( 'GET', 'https://webmaniabr.com/api/1/nfe/sefaz/', $data );
         if (isset($response->error)) return $response;
@@ -22,7 +22,7 @@ class NFe {
         
     }
     
-    function validadeCertificado(){
+    function validadeCertificado( $data = null ){
         
         $response = self::connect_webmaniabr( 'GET', 'https://webmaniabr.com/api/1/nfe/certificado/', $data );
         if (isset($response->error)) return $response;
