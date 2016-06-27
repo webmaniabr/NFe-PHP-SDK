@@ -1,13 +1,13 @@
 # NF-e PHP SDK
 
-Emissão automática de Nota Fiscal Eletrônica através da REST API de Nota Fiscal Eletrônica da WebmaniaBR®. Emita as suas Notas Fiscais realizando a integração com o seu sistema.
+Através do emissor de Nota Fiscal da WebmaniaBR®, você conta com a emissão e arquivamento das suas notas fiscais, cálculo automático de impostos, geração do Danfe para impressão e envio automático de e-mails para os clientes. Realize a integração com o seu sistema utilizando a nossa REST API.
 
-Documentação: https://webmaniabr.com/docs/rest-api-nfe/
+- Emissor de NF-e da WebmaniaBR®: [Saiba mais](https://webmaniabr.com/smartsales/nota-fiscal-eletronica/)
+- Documentação da REST API: [Visualizar](https://webmaniabr.com/docs/rest-api-nfe/)
 
 ## Requisitos
 
-- Escolha um plano que se adeque as necessidades da sua empresa. Para saber mais: https://webmaniabr.com/start/nota-fiscal-eletronica/
-- Obtenha as credenciais de acesso da sua aplicação.
+- Contrate um dos planos de Nota Fiscal Eletrônica da WebmaniaBR® a partir de R$29,90/mês: [Assine agora mesmo](https://webmaniabr.com/smartsales/nota-fiscal-eletronica/).
 - Realize a integração com o seu sistema.
 
 ## Utilização
@@ -41,4 +41,4 @@ Verifique todos os exemplos de utilização no diretório /exemplos/. Segue abai
 
 ## Suporte
 
-Qualquer dúvida estamos à disposição e abertos para melhorias e sugestões, em breve teremos um fórum para discussões. Qualquer dúvida entre em contato na nossa Central de Atendimento: https://webmaniabr.com/atendimento/.
+Qualquer dúvida entre em contato na nossa [Central de Atendimento](https://webmaniabr.com/atendimento/) ou no e-mail suporte@webmaniabr.com.
