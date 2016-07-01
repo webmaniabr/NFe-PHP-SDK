@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace WebmaniaBR;
 
@@ -15,6 +15,7 @@ class NFe {
     
     function statusSefaz( $data = null ){
         
+        $data = array();
         $response = self::connect_webmaniabr( 'GET', 'https://webmaniabr.com/api/1/nfe/sefaz/', $data );
         if (isset($response->error)) return $response;
         if ($response->status == 'online') return true;
@@ -24,6 +25,7 @@ class NFe {
     
     function validadeCertificado( $data = null ){
         
+        $data = array();
         $response = self::connect_webmaniabr( 'GET', 'https://webmaniabr.com/api/1/nfe/certificado/', $data );
         if (isset($response->error)) return $response;
         return $response->expiration;
@@ -101,3 +103,10 @@ class NFe {
     }
     
 }
+<<<<<<< HEAD
+<<<<<<< HEAD
+?>
+=======
+>>>>>>> origin/master
+=======
+>>>>>>> origin/master
