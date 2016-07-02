@@ -16,7 +16,7 @@ class NFe {
     function statusSefaz( $data = null ){
         
         $data = array();
-        $response = self::connect_webmaniabr( 'GET', 'https://webmaniabr.com/api/1/nfe/sefaz/', $data );
+        $response = self::connectWebmaniaBR( 'GET', 'https://webmaniabr.com/api/1/nfe/sefaz/', $data );
         if (isset($response->error)) return $response;
         if ($response->status == 'online') return true;
         else return false;
@@ -26,7 +26,7 @@ class NFe {
     function validadeCertificado( $data = null ){
         
         $data = array();
-        $response = self::connect_webmaniabr( 'GET', 'https://webmaniabr.com/api/1/nfe/certificado/', $data );
+        $response = self::connectWebmaniaBR( 'GET', 'https://webmaniabr.com/api/1/nfe/certificado/', $data );
         if (isset($response->error)) return $response;
         return $response->expiration;
         
@@ -34,7 +34,7 @@ class NFe {
     
     function emissaoNotaFiscal( array $data ){
         
-        $response = self::connect_webmaniabr( 'POST', 'https://webmaniabr.com/api/1/nfe/emissao/', $data );
+        $response = self::connectWebmaniaBR( 'POST', 'https://webmaniabr.com/api/1/nfe/emissao/', $data );
         return $response;
         
     }
@@ -43,7 +43,7 @@ class NFe {
         
         $data = array();
         $data['chave'] = $chave;
-        $response = self::connect_webmaniabr( 'GET', 'https://webmaniabr.com/api/1/nfe/consulta/', $data );
+        $response = self::connectWebmaniaBR( 'GET', 'https://webmaniabr.com/api/1/nfe/consulta/', $data );
         return $response;
         
     }
@@ -53,7 +53,7 @@ class NFe {
         $data = array();
         $data['chave'] = $chave;
         $data['motivo'] = $motivo;
-        $response = self::connect_webmaniabr( 'PUT', 'https://webmaniabr.com/api/1/nfe/cancelar/', $data );
+        $response = self::connectWebmaniaBR( 'PUT', 'https://webmaniabr.com/api/1/nfe/cancelar/', $data );
         return $response;
         
     }
@@ -63,12 +63,12 @@ class NFe {
         $data = array();
         $data['sequencia'] = $sequencia;
         $data['motivo'] = $motivo;
-        $response = self::connect_webmaniabr( 'PUT', 'https://webmaniabr.com/api/1/nfe/inutilizar/', $data );
+        $response = self::connectWebmaniaBR( 'PUT', 'https://webmaniabr.com/api/1/nfe/inutilizar/', $data );
         return $response;
         
     }
     
-    function connect_webmaniabr( $request, $endpoint, $data ){
+    function connectWebmaniaBR( $request, $endpoint, $data ){
 
         @set_time_limit( 300 );
         ini_set('max_execution_time', 300);
@@ -103,10 +103,5 @@ class NFe {
     }
     
 }
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 ?>
-=======
->>>>>>> origin/master
-=======
->>>>>>> origin/master
