@@ -43,6 +43,7 @@ Verifique todos os exemplos de utilização no diretório /exemplos/. Segue abai
 - **consultaNotaFiscal**: Consulta o status da Nota Fiscal enviada para o SEFAZ.
 - **cancelarNotaFiscal**: Cancelar Nota Fiscal enviada ao SEFAZ.
 - **inutilizarNumeracao**: Inutilizar sequência de numeração junto ao SEFAZ.
+- **cartaCorrecao**: Corrigir uma Nota Fiscal junto ao SEFAZ.
 
 ## Suporte
 
