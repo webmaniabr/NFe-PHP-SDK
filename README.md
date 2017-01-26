@@ -44,6 +44,7 @@ Verifique todos os exemplos de utilização no diretório /exemplos/. Segue abai
 - **cancelarNotaFiscal**: Cancelar Nota Fiscal enviada ao SEFAZ.
 - **inutilizarNumeracao**: Inutilizar sequência de numeração junto ao SEFAZ.
 - **cartaCorrecao**: Corrigir uma Nota Fiscal junto ao SEFAZ.
+- **devolucaoNotaFiscal**: Emissão de Nota Fiscal de devolução junto ao SEFAZ.
 
 ## Suporte
 
