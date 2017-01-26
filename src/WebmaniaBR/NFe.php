@@ -3,71 +3,85 @@
 namespace WebmaniaBR;
 
 class NFe {
-    
+
     function __construct( array $vars ){
-        
+
         $this->consumerKey = $vars['consumer_key'];
         $this->consumerSecret = $vars['consumer_secret'];
         $this->accessToken = $vars['oauth_access_token'];
         $this->accessTokenSecret = $vars['oauth_access_token_secret'];
-        
+
     }
-    
+
     function statusSefaz( $data = null ){
-        
+
         $data = array();
         $response = self::connectWebmaniaBR( 'GET', 'https://webmaniabr.com/api/1/nfe/sefaz/', $data );
         if (isset($response->error)) return $response;
         if ($response->status == 'online') return true;
         else return false;
-        
+
     }
-    
+
     function validadeCertificado( $data = null ){
-        
+
         $data = array();
         $response = self::connectWebmaniaBR( 'GET', 'https://webmaniabr.com/api/1/nfe/certificado/', $data );
         if (isset($response->error)) return $response;
         return $response->expiration;
-        
+
     }
-    
+
     function emissaoNotaFiscal( array $data ){
-        
+
         $response = self::connectWebmaniaBR( 'POST', 'https://webmaniabr.com/api/1/nfe/emissao/', $data );
         return $response;
-        
+
     }
-    
-    function consultaNotaFiscal( $chave ){
-        
+
+    function consultaNotaFiscal( $chave, $ambiente ){
+
         $data = array();
         $data['chave'] = $chave;
+        $data['ambiente'] = $ambiente;
         $response = self::connectWebmaniaBR( 'GET', 'https://webmaniabr.com/api/1/nfe/consulta/', $data );
         return $response;
-        
+
     }
-    
-    function cancelarNotaFiscal( $chave, $motivo ){
-        
+
+    function cancelarNotaFiscal( $chave, $motivo, $ambiente ){
+
         $data = array();
         $data['chave'] = $chave;
         $data['motivo'] = $motivo;
+        $data['ambiente'] = $ambiente;
         $response = self::connectWebmaniaBR( 'PUT', 'https://webmaniabr.com/api/1/nfe/cancelar/', $data );
         return $response;
-        
+
     }
-    
-    function inutilizarNumeracao( $sequencia, $motivo ){
-        
+
+    function inutilizarNumeracao( $sequencia, $motivo, $ambiente ){
+
         $data = array();
         $data['sequencia'] = $sequencia;
         $data['motivo'] = $motivo;
+        $data['ambiente'] = $ambiente;
         $response = self::connectWebmaniaBR( 'PUT', 'https://webmaniabr.com/api/1/nfe/inutilizar/', $data );
         return $response;
-        
+
     }
-    
+
+    function cartaCorrecao( $chave, $correcao, $ambiente ){
+
+        $data = array();
+        $data['chave'] = $chave;
+        $data['correcao'] = $correcao;
+        $data['ambiente'] = $ambiente;
+        $response = self::connectWebmaniaBR( 'POST', 'https://webmaniabr.com/api/1/nfe/cartacorrecao/', $data );
+        return $response;
+
+    }
+
     function connectWebmaniaBR( $request, $endpoint, $data ){
 
         @set_time_limit( 300 );
@@ -85,7 +99,7 @@ class NFe {
         );
 
         $rest = curl_init();
-        curl_setopt($rest, CURLOPT_CONNECTTIMEOUT , 300); 
+        curl_setopt($rest, CURLOPT_CONNECTTIMEOUT , 300);
         curl_setopt($rest, CURLOPT_TIMEOUT, 300);
         curl_setopt($rest, CURLOPT_URL, $endpoint.'?time='.time());
         curl_setopt($rest, CURLOPT_RETURNTRANSFER, true);
@@ -97,11 +111,11 @@ class NFe {
         curl_setopt($rest, CURLOPT_FRESH_CONNECT, true);
         $response = curl_exec($rest);
         curl_close($rest);
-        
+
         return json_decode($response);
 
     }
-    
+
 }
 
 ?>
