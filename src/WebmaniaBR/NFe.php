@@ -82,6 +82,18 @@ class NFe {
 
     }
 
+    function devolucaoNotaFiscal( $chave, $classe_imposto, $natureza_operacao, $ambiente ){
+
+        $data = array();
+        $data['chave'] = $chave;
+        $data['classe_imposto'] = $classe_imposto;
+        $data['natureza_operacao'] = $natureza_operacao;
+        $data['ambiente'] = $ambiente;
+        $response = self::connectWebmaniaBR( 'POST', 'https://webmaniabr.com/api/1/nfe/devolucao/', $data );
+        return $response;
+
+    }
+
     function connectWebmaniaBR( $request, $endpoint, $data ){
 
         @set_time_limit( 300 );
