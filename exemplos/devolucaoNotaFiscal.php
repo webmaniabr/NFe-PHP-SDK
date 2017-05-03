@@ -13,10 +13,13 @@ $settings = array(
 
 $webmaniabr = new NFe($settings);
 $chave = '45150819652219000198550990000000011442380343';
-$classe_imposto = 'REF1637';
 $natureza_operacao = 'Devolução de venda de produção do estabelecimento';
 $ambiente = '1'; // 1 - Produção ou 2 - Homologação
-$response = $webmaniabr->devolucaoNotaFiscal( $chave, $classe_imposto, $natureza_operacao, $ambiente );
+$codigo_cfop = '2.202';
+//$classe_imposto = 'REF1637'; // Obrigatório caso não informado o Código CFOP
+$produtos = array( 2, 3 ); // Obrigatório para devolução parcial
+
+$response = $webmaniabr->devolucaoNotaFiscal( $chave, $natureza_operacao, $ambiente, $codigo_cfop, $classe_imposto, $produtos );
 
 // Retorno
 if (isset($response->error)){
