@@ -45,6 +45,7 @@ Verifique todos os exemplos de utilização no diretório /exemplos/. Segue abai
 - **inutilizarNumeracao**: Inutilizar sequência de numeração junto ao SEFAZ.
 - **cartaCorrecao**: Corrigir uma Nota Fiscal junto ao SEFAZ.
 - **devolucaoNotaFiscal**: Emissão de Nota Fiscal de devolução junto ao SEFAZ.
+- **retornoNotaFiscal**: Exemplo de retorno obtido através da url_notificacao.
 
 ## Suporte
 
