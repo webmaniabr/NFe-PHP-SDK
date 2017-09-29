@@ -46,8 +46,8 @@ $data = array(
 );
 
 // Produtos
-$items = array();
-foreach($items as $item):
+//$items = array();
+//foreach($items as $item):
 
     $data['produtos'][] = array(
         'nome' => 'Camisetas Night Run', // Nome do produto
@@ -63,7 +63,7 @@ foreach($items as $item):
         'classe_imposto' => 'REF1637' // Referência do imposto cadastrado
     );
 
-endforeach;
+//endforeach;
 
 // Emissão
 $response = $webmaniabr->emissaoNotaFiscal( $data );
