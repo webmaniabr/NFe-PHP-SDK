@@ -6,7 +6,7 @@
     "keywords": ["notafiscal", "api", "nfe"],
     "homepage": "https://webmaniabr.com/docs/rest-api-nfe/",
     "platform": {
-        "php": "5.2.0"
+        "php": "7.0"
     },
     "require": {},
     "authors": [
