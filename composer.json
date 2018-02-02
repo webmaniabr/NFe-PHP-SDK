@@ -5,6 +5,7 @@
     "description": "PHP SDK da REST API de Nota Fiscal Eletrônica da WebmaniaBR®",
     "keywords": ["notafiscal", "api", "nfe"],
     "homepage": "https://webmaniabr.com/docs/rest-api-nfe/",
+    "license": "Apache-2.0",
     "platform": {
         "php": "7.0"
     },
