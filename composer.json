@@ -2,14 +2,13 @@
     "name": "webmaniabr/nfe",
     "type": "library",
     "version": "1.0",
-    "description": "PHP SDK da REST API de Nota Fiscal Eletrônica da WebmaniaBR®",
-    "keywords": ["notafiscal", "api", "nfe"],
+    "description": "Emissão de Nota Fiscal Eletrônica na linguagem PHP utilizando a REST API da WebmaniaBR®.",
+    "keywords": ["notafiscal", "api", "nfe", "nfce", "nota fiscal"],
     "homepage": "https://webmaniabr.com/docs/rest-api-nfe/",
     "license": "Apache-2.0",
-    "platform": {
-        "php": "7.0"
-    },
-    "require": {},
+    "require": {
+        "php": ">=5.5.0",
+    }
     "authors": [
         {
             "name": "Equipe WebmaniaBR",
@@ -20,5 +19,6 @@
         "psr-0": {
             "WebmaniaBR": "src/"
         }
-    }
+    },
+    "minimum-stability": "dev"
 }
