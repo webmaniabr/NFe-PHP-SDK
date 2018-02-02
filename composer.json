@@ -8,7 +8,7 @@
     "license": "Apache-2.0",
     "require": {
         "php": ">=5.5.0",
-    }
+    },
     "authors": [
         {
             "name": "Equipe WebmaniaBR",
