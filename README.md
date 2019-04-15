@@ -12,13 +12,7 @@ Através do emissor de Nota Fiscal da WebmaniaBR®, você conta com a emissão e
 
 ## Utilização
 
-Execute o Composer:
-
-```php
-composer require webmaniabr/nfe
-```
-
-Adicione o arquivo autoload.php no topo do seu arquivo, caso não possua o Composer adicione o arquivo NFe.php diretamente:
+Execute o Composer e adicione o require no topo do seu arquivo, caso não possua o Composer adicione o arquivo NFe.php diretamente:
 
 ```php
 require_once __DIR__ . '/vendor/autoload.php';
@@ -30,12 +24,12 @@ OU
 require_once __DIR__ . '/src/WebmaniaBR/NFe.php';
 ```
 
-Antes de executar as funções defina as credenciais da sua aplicação:
+Antes de executar as funções defina as credenciais de acesso da sua aplicação no arquivo /src/WebmaniaBR/settings.php:
 
 ```php
 $settings = array(
-    'oauth_access_token' => '',
-    'oauth_access_token_secret' => '',
+    'access_token' => '',
+    'access_token_secret' => '',
     'consumer_key' => '',
     'consumer_secret' => '',
 );
@@ -43,15 +37,17 @@ $settings = array(
 
 Verifique todos os exemplos de utilização no diretório /exemplos/. Segue abaixo a listagem das funções:
 
+- **ajusteNotaFiscal**: Emite uma nota fiscal de ajuste.
+- **cancelarNotaFiscal**: Cancelar Nota Fiscal enviada ao SEFAZ.
+- **cartaCorrecao**: Corrigir uma Nota Fiscal junto ao SEFAZ.
+- **complementarNotaFiscal**: Emite uma Nota Fiscal complementar.
+- **consultaNotaFiscal**: Consulta o status da Nota Fiscal enviada para o SEFAZ.
+- **devolucaoNotaFiscal**: Emissão de Nota Fiscal de devolução junto ao SEFAZ.
+- **emissaoNotaFiscal**: Emissão da Nota Fiscal junto ao SEFAZ, com exemplos para a emissão com detalhamento específicos.
+- **inutilizarNumeracao**: Inutilizar sequência de numeração junto ao SEFAZ.
+- **retornoNotaFiscal**: Exemplo de retorno da API após a emissão de Nota Fiscal.
 - **statusSefaz**: Verifica se o Sefaz está Online ou Offline.
 - **validadeCertificado**: Verifica se o Certificado A1 é válido e quantos dias faltam para expirar.
-- **emissaoNotaFiscal**: Emissão da Nota Fiscal junto ao SEFAZ.
-- **consultaNotaFiscal**: Consulta o status da Nota Fiscal enviada para o SEFAZ.
-- **cancelarNotaFiscal**: Cancelar Nota Fiscal enviada ao SEFAZ.
-- **inutilizarNumeracao**: Inutilizar sequência de numeração junto ao SEFAZ.
-- **cartaCorrecao**: Corrigir uma Nota Fiscal junto ao SEFAZ.
-- **devolucaoNotaFiscal**: Emissão de Nota Fiscal de devolução junto ao SEFAZ.
-- **retornoNotaFiscal**: Exemplo de retorno obtido através da url_notificacao.
 
 ## Suporte
 

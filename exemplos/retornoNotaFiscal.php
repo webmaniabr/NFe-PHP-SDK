@@ -1,7 +1,7 @@
 <?php
 
 header('Content-Type: text/html; charset=utf-8');
-require_once __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__.'/../src/WebmaniaBR/NFe.php';
 use WebmaniaBR\NFe;
 
 /**
@@ -14,15 +14,16 @@ use WebmaniaBR\NFe;
  * no modo em contingência.
  */
 
+$uuid = (string) $_POST['uuid']; // Número único de identificação da Nota Fiscal
 $status = (string) $_POST['status']; // aprovado, reprovado, cancelado, processamento ou contingencia
 $nfe = (int) $_POST['nfe']; // número da NF-e
 $serie = (int) $_POST['serie']; // número de série
 $recibo = (int) $_POST['recibo']; // número do recibo
 $chave = $_POST['chave']; // número da chave de acesso
 $xml = (string) $_POST['xml']; // URL do XML
-$danfe = (string)$_POST['danfe']; // URL do Danfe (PDF)
-$data = $_POST['data'];
-$log = $_POST['log'];
+$danfe = (string) $_POST['danfe']; // URL do Danfe (PDF)
+$log = $_POST['log']; // Log de retorno do Sefaz
+$data = $_POST['data']; // Informações enviadas para emissão da Nota Fiscal
 
 /**
  * Informações que podem ser coletadas pelo retorno Data,

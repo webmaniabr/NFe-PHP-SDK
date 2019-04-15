@@ -1,40 +1,51 @@
 <?php
-
 header('Content-Type: text/html; charset=utf-8');
-require_once __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__.'/../src/WebmaniaBR/NFe.php';
 use WebmaniaBR\NFe;
 
-$settings = array(
-    'oauth_access_token' => '',
-    'oauth_access_token_secret' => '',
-    'consumer_key' => '',
-    'consumer_secret' => '',
-);
+/**
+ * Credenciais de acesso
+ */
+include __DIR__.'/../src/WebmaniaBR/settings.php';
 
+/**
+* Consulta de Nota fiscal
+*
+* Atenção: Somente é permitido consultar a chave da nota fiscal emitida pelo
+* emissor da WebmaniaBR, não sendo possível consultar nota fiscal de terceiro
+* ou emitida em outro sistema.
+*/
+$chave = '00000000000000000000000000000000000000000000';
+
+/**
+* Solicitação da consulta
+*/
 $webmaniabr = new NFe($settings);
-$chave = '45150819652219000198550990000000011442380343';
-$ambiente = '1'; // 1 - Produção ou 2 - Homologação
-$response = $webmaniabr->consultaNotaFiscal( $chave, $ambiente );
+$response = $webmaniabr->consultaNotaFiscal( $chave );
 
+/**
+* Retorno
+*/
 if (isset($response->error)){
 
-    echo '<h2>Erro: '.$response->error.'</h2>';
-    exit();
+  echo '<h2>Erro: '.$response->error.'</h2>';
+  exit();
 
 } else {
 
-    echo '<h2>Resultado da Consulta:</h2>';
+  echo '<h2>Resultado da Consulta:</h2>';
 
-    $status = (string) $response->status; // aprovado, reprovado, cancelado, processamento ou contingencia
-    $nfe = (int) $response->nfe; // número da NF-e
-    $serie = (int) $response->serie; // número de série
-    $recibo = (int) $response->recibo; // número do recibo
-    $chave = (int) $response->chave; // número da chave de acesso
-    $xml = (string) $response->xml; // URL do XML
-    $danfe = (string) $response->danfe; // URL do Danfe (PDF)
-    $log = $response->log;
+  $uuid = (string) $response->uuid; // Número único de identificação da Nota Fiscal
+  $status = (string) $response->status; // aprovado, reprovado, cancelado, processamento ou contingencia
+  $nfe = (int) $response->nfe; // Número da NF-e
+  $serie = (int) $response->serie; // Número de série
+  $recibo = (int) $response->recibo; // Número do recibo
+  $chave = $response->chave; // Número da chave de acesso
+  $xml = (string) $response->xml; // URL do XML
+  $danfe = (string) $response->danfe; // URL do Danfe (PDF)
+  $log = $response->log; // Log do Sefaz
 
-    print_r($response);
-    exit();
+  print_r($response);
+  exit();
 
 }

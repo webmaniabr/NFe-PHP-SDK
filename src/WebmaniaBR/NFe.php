@@ -8,8 +8,8 @@ class NFe {
 
         $this->consumerKey = $vars['consumer_key'];
         $this->consumerSecret = $vars['consumer_secret'];
-        $this->accessToken = $vars['oauth_access_token'];
-        $this->accessTokenSecret = $vars['oauth_access_token_secret'];
+        $this->accessToken = $vars['access_token'];
+        $this->accessTokenSecret = $vars['access_token_secret'];
 
     }
 
@@ -39,22 +39,20 @@ class NFe {
 
     }
 
-    function consultaNotaFiscal( $chave, $ambiente ){
+    function consultaNotaFiscal( $chave ){
 
         $data = array();
         $data['chave'] = $chave;
-        $data['ambiente'] = $ambiente;
         $response = self::connectWebmaniaBR( 'GET', 'https://webmaniabr.com/api/1/nfe/consulta/', $data );
         return $response;
 
     }
 
-    function cancelarNotaFiscal( $chave, $motivo, $ambiente ){
+    function cancelarNotaFiscal( $chave, $motivo ){
 
         $data = array();
         $data['chave'] = $chave;
         $data['motivo'] = $motivo;
-        $data['ambiente'] = $ambiente;
         $response = self::connectWebmaniaBR( 'PUT', 'https://webmaniabr.com/api/1/nfe/cancelar/', $data );
         return $response;
 
@@ -71,12 +69,11 @@ class NFe {
 
     }
 
-    function cartaCorrecao( $chave, $correcao, $ambiente ){
+    function cartaCorrecao( $chave, $correcao ){
 
         $data = array();
         $data['chave'] = $chave;
         $data['correcao'] = $correcao;
-        $data['ambiente'] = $ambiente;
         $response = self::connectWebmaniaBR( 'POST', 'https://webmaniabr.com/api/1/nfe/cartacorrecao/', $data );
         return $response;
 
@@ -94,6 +91,16 @@ class NFe {
         $response = self::connectWebmaniaBR( 'POST', 'https://webmaniabr.com/api/1/nfe/devolucao/', $data );
         return $response;
 
+    }
+
+    function ajusteNotaFiscal( $data ){
+        $response = self::connectWebmaniaBR( 'POST', 'https://webmaniabr.com/api/1/nfe/ajuste/', $data );
+        return $response;
+    }
+
+    function complementarNotaFiscal( $data ) {
+        $response = self::connectWebmaniaBR( 'POST', 'https://webmaniabr.com/api/1/nfe/nfe_referenciada/', $data);
+        return $response;
     }
 
     function connectWebmaniaBR( $request, $endpoint, $data ){

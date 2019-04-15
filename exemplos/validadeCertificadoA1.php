@@ -1,15 +1,13 @@
 <?php
-
 header('Content-Type: text/html; charset=utf-8');
-require_once __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__.'/../src/WebmaniaBR/NFe.php';
 use WebmaniaBR\NFe;
 
-$settings = array(
-    'oauth_access_token' => '',
-    'oauth_access_token_secret' => '',
-    'consumer_key' => '',
-    'consumer_secret' => '',
-);
+/**
+ * Credenciais de acesso
+ */
+ 
+include __DIR__.'/../src/WebmaniaBR/settings.php';
 
 $webmaniabr = new NFe($settings);
 $response = $webmaniabr->validadeCertificado();
