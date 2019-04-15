@@ -107,7 +107,17 @@ $data['pedido'] = array(
   'modalidade_frete' => 0, // Modalidade do frete
   'frete' => '12.56', // Total do frete
   'desconto' => '10.00', // Total do desconto
-  'total' => '174.60' // Valor total do pedido pago pelo cliente
+  'total' => '174.60', // Valor total do pedido pago pelo cliente,
+  'pagamento' => 0, // Indicador da forma de pagamento
+  'forma_pagamento' => '15', // Meio de pagamento (15 - Boleto Bancário),
+  /*
+  // Informações do pagamento (opcional)
+  'valor_pagamento' => '', // Valor do pagamento
+  'cnpj_credenciadora' => '', // // CNPJ da Credenciadora de cartão de crédito/débito
+  'bandeira' => "", // Bandeira da operadora do cartão de crédito/débito
+  'autorizacao' => "", // Número da autorização da operadora de cartão de crédito/débito (NSU)
+  'tipo_integracao' => 2 // Tipo de integração para pagamento
+  */
 );
 
 /**
