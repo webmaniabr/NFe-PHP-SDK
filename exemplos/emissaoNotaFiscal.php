@@ -43,7 +43,7 @@ $data = array(
 $data['produtos'] = array(
   array(
     'nome' => 'Nome do produto', // Nome do produto
-    'sku' => 'nome-do-produto', // Código identificador - SKU
+    'codigo' => 'nome-do-produto', // Código do produto
     'ncm' => '6109.10.00', // Código NCM
     'cest' => '28.038.00', // Código CEST
     'quantidade' => 3, // Quantidade de itens
