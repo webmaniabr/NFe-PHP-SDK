@@ -12,7 +12,13 @@ Através do emissor de Nota Fiscal da WebmaniaBR®, você conta com a emissão e
 
 ## Utilização
 
-Execute o Composer e adicione o require no topo do seu arquivo, caso não possua o Composer adicione o arquivo NFe.php diretamente:
+Execute o Composer:
+
+```php
+composer require webmaniabr/nfe
+```
+
+Adicione o arquivo autoload.php no topo do seu arquivo, caso não possua o Composer adicione o arquivo NFe.php diretamente:
 
 ```php
 require_once __DIR__ . '/vendor/autoload.php';
