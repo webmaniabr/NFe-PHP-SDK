@@ -4,11 +4,6 @@ require_once __DIR__.'/../src/WebmaniaBR/NFe.php';
 use WebmaniaBR\NFe;
 
 /**
- * Credenciais de acesso
- */
-include __DIR__.'/../src/WebmaniaBR/settings.php';
-
-/**
  * Informações da Nota Fiscal Complementar
  *
  * A Nota Fiscal Complementar é destinada para acrescentar dados e valores
@@ -72,7 +67,7 @@ $data['impostos'] = array(
 );
 
 //Emissão
-$webmaniabr = new NFe($settings);
+$webmaniabr = new NFe('SEU_CONSUMER_KEY', 'SEU_CONSUMER_SECRET', 'SEU_ACCESS_TOKEN', 'SEU_ACCESS_TOKEN_SECRET');
 $response = $webmaniabr->complementarNotaFiscal( $data );
 
 //Retorno

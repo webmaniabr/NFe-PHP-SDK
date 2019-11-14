@@ -4,11 +4,6 @@ require_once __DIR__.'/../src/WebmaniaBR/NFe.php';
 use WebmaniaBR\NFe;
 
 /**
- * Credenciais de acesso
- */
-include __DIR__.'/../src/WebmaniaBR/settings.php';
-
-/**
  * Status do Sefaz
  *
  * OBS: A utilização do endpoint deve ser realizada como demonstrativo do Status do
@@ -16,7 +11,7 @@ include __DIR__.'/../src/WebmaniaBR/settings.php';
  * Não é necessário realizar a requisição antes da emissão de cada Nota Fiscal,
  * porque este procedimento é realizado de forma automática em todos os endpoints.
  */
-$webmaniabr = new NFe($settings);
+$webmaniabr = new NFe('SEU_CONSUMER_KEY', 'SEU_CONSUMER_SECRET', 'SEU_ACCESS_TOKEN', 'SEU_ACCESS_TOKEN_SECRET');
 $response = $webmaniabr->statusSefaz();
 
 if (isset($response->error)){

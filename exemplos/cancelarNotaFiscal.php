@@ -4,11 +4,6 @@ require_once __DIR__.'/../src/WebmaniaBR/NFe.php';
 use WebmaniaBR\NFe;
 
 /**
- * Credenciais de acesso
- */
-include __DIR__.'/../src/WebmaniaBR/settings.php';
-
-/**
 * Cancelar Nota Fiscal
 *
 * Atenção: Somente poderá ser cancelada uma NF-e cujo uso tenha sido previamente
@@ -24,7 +19,7 @@ $motivo = 'Exemplo: Cancelamento por motivos administrativos.';
 /**
 * Solicitação do cancelamento
 */
-$webmaniabr = new NFe($settings);
+$webmaniabr = new NFe('SEU_CONSUMER_KEY', 'SEU_CONSUMER_SECRET', 'SEU_ACCESS_TOKEN', 'SEU_ACCESS_TOKEN_SECRET');
 $response = $webmaniabr->cancelarNotaFiscal( $chave, $motivo );
 
 /**

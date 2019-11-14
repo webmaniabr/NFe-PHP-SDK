@@ -3,20 +3,14 @@ header('Content-Type: text/html; charset=utf-8');
 require_once __DIR__.'/../src/WebmaniaBR/NFe.php';
 use WebmaniaBR\NFe;
 
-/**
- * Credenciais de acesso
- */
- 
-include __DIR__.'/../src/WebmaniaBR/settings.php';
-
-$webmaniabr = new NFe($settings);
+$webmaniabr = new NFe('SEU_CONSUMER_KEY', 'SEU_CONSUMER_SECRET', 'SEU_ACCESS_TOKEN', 'SEU_ACCESS_TOKEN_SECRET');
 $response = $webmaniabr->validadeCertificado();
 
 if (isset($response->error)){
-    
+
     echo '<h2>Erro: '.$response->error.'</h2>';
     exit();
-    
+
 } else {
 
     if ($response > 45){
@@ -32,5 +26,5 @@ if (isset($response->error)){
         echo '<h2>Certificado Digital A1 vencido. Emita um novo para continuar operando.</h2>';
 
     }
-    
+
 }

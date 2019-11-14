@@ -1,12 +1,6 @@
 <?php
 header('Content-Type: text/html; charset=utf-8');
 require_once __DIR__.'/../src/WebmaniaBR/NFe.php';
-use WebmaniaBR\NFe;
-
-/**
- * Credenciais de acesso
- */
-include __DIR__.'/../src/WebmaniaBR/settings.php';
 
 /**
 * Informações da Nota Fiscal Eletrônica
@@ -102,20 +96,21 @@ $data['produtos'] = array(
 */
 $data['pedido'] = array(
   'pagamento' => 0, // Indicador da forma de pagamento: 0 - Pagamento à vista ou 1 - Pagamento a prazo
-  'forma_pagamento' => [ 15 ], // Meio(s) de pagamento (15 - Boleto Bancário)
+  'forma_pagamento' => [ 15 ], // Meio de pagamento
   'presenca' => 2, // Indicador de presença do comprador no estabelecimento comercial no momento da operação
   'modalidade_frete' => 0, // Modalidade do frete
   'frete' => '12.56', // Total do frete
   'desconto' => '10.00', // Total do desconto
   'total' => '174.60', // Valor total do pedido pago pelo cliente,
-  'pagamento' => [ 0 ], // Indicador da forma de pagamento
+  'pagamento' => 0, // Indicador da forma de pagamento
+  'forma_pagamento' => '15', // Meio de pagamento (15 - Boleto Bancário),
   /*
   // Informações do pagamento (opcional)
-  'valor_pagamento' => [], // Valor do pagamento
-  'cnpj_credenciadora' => [], // // CNPJ da Credenciadora de cartão de crédito/débito
-  'bandeira' => [], // Bandeira da operadora do cartão de crédito/débito
-  'autorizacao' => [], // Número da autorização da operadora de cartão de crédito/débito (NSU)
-  'tipo_integracao' => [ 2 ] // Tipo de integração para pagamento
+  'valor_pagamento' => '', // Valor do pagamento
+  'cnpj_credenciadora' => '', // // CNPJ da Credenciadora de cartão de crédito/débito
+  'bandeira' => "", // Bandeira da operadora do cartão de crédito/débito
+  'autorizacao' => "", // Número da autorização da operadora de cartão de crédito/débito (NSU)
+  'tipo_integracao' => 2 // Tipo de integração para pagamento
   */
 );
 
@@ -173,7 +168,7 @@ $data['pedido'] = array(
 );*/
 
 // Emissão
-$webmaniabr = new NFe($settings);
+$webmaniabr = new NFe('SEU_CONSUMER_KEY', 'SEU_CONSUMER_SECRET', 'SEU_ACCESS_TOKEN', 'SEU_ACCESS_TOKEN_SECRET');
 $response = $webmaniabr->emissaoNotaFiscal( $data );
 
 // Retorno

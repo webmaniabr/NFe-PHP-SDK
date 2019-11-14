@@ -4,11 +4,6 @@ require_once __DIR__.'/../src/WebmaniaBR/NFe.php';
 use WebmaniaBR\NFe;
 
 /**
- * Credenciais de acesso
- */
-include __DIR__.'/../src/WebmaniaBR/settings.php';
-
-/**
  * Informações da Nota Fiscal Eletrônica
  * Verificar emissaoNotaFiscal.php
  *
@@ -39,7 +34,7 @@ $data = array(
 );
 
 //Emissão de Nota Fiscal de ajuste
-$webmaniabr = new NFe($settings);
+$webmaniabr = new NFe('SEU_CONSUMER_KEY', 'SEU_CONSUMER_SECRET', 'SEU_ACCESS_TOKEN', 'SEU_ACCESS_TOKEN_SECRET');
 $response = $webmaniabr->ajusteNotaFiscal( $data );
 
 // Retorno
