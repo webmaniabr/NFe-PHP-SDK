@@ -29,19 +29,14 @@ require_once __DIR__ . '/vendor/autoload.php';
 use WebmaniaBR\NFe;
 ```
 
-OU
-
-```php
-require_once __DIR__ . '/src/WebmaniaBR/NFe.php';
-```
-
-Caso esteja usando algum framework, como por exemplo o Laravel, instale o módulo da WebmaniaBR® via composer e o importe para seu controller da seguinte maneira:
+Caso esteja usando algum framework, como por exemplo o Laravel, instale o módulo da WebmaniaBR® via composer e referencie o seguinte namespace em seu controller:
 
 ```php
 use WebmaniaBR\NFe;
 ```
 
-Informe as credenciais de acesso da sua aplicação no método construtor da classe NFe:
+Dessa forma, a classe NFe já pode ser instanciada e utilizada conforme a sua necessidade!
+Informe as suas credenciais de acesso diretamente no método construtor da classe NFe:
 
 ```php
 $this->webmaniabr = new NFe('SEU_CONSUMER_KEY', 'SEU_CONSUMER_SECRET', 'SEU_ACCESS_TOKEN', 'SEU_ACCESS_TOKEN_SECRET');
@@ -51,9 +46,9 @@ E pronto, sua plataforma já está pronta para se comunicar com a API da Webmani
 Para emitir uma NF-e por exemplo, deve ser utilizado o método ``` emissaoNotaFiscal( $data ) ```:
 
 ```php
-$resp = $this->webmaniabr->emissaoNotaFiscal( $data );
+$response = $this->webmaniabr->emissaoNotaFiscal( $data );
 
-if($resp->error) {
+if($response->error) {
 
    echo 'Ocorreu um erro: ' . $resp->error;
 
@@ -72,9 +67,9 @@ if($resp->error) {
 }
 ```
 
-Onde ``` $data ``` é um array com os dados da Nota Fiscal, para maiores informações quais dados devem ser enviados, consulte a [documentação](https://webmaniabr.com/docs/rest-api-nfe/#emitir-nfe).
+Onde ``` $data ``` é um array com os dados da Nota Fiscal a ser emitida, para maiores informações quais dados devem ser enviados, consulte a [documentação](https://webmaniabr.com/docs/rest-api-nfe/#emitir-nfe).
 
-Verifique todos os exemplos de utilização no diretório /exemplos/. Segue abaixo uma listagem dos métodos existentes em nosso módulo e os devidos parâmetros que devem ser informados:
+Verifique todos os exemplos de utilização no diretório /exemplos/. Segue abaixo uma listagem dos métodos existentes em nossa SDK e os devidos parâmetros que devem ser informados:
 
 ```php
 ajusteNotaFiscal( $array ); // Emite uma nota fiscal de ajuste.

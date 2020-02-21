@@ -1,6 +1,7 @@
 <?php
 
 namespace WebmaniaBR;
+use StdClass;
 
 class NFe {
 
