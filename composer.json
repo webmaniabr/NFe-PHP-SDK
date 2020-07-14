@@ -6,6 +6,8 @@
     "description": "PHP SDK da REST API de Nota Fiscal Eletrônica da WebmaniaBR®",
     "keywords": ["notafiscal", "api", "nfe", "nfce", "nota fiscal", "nf-e", "nfc-e", "webmaniabr", "sefaz"],
     "homepage": "https://webmaniabr.com/docs/rest-api-nfe/",
+    "minimum-stability": "dev-master",
+    "prefer-stable": true,
     "require": {
         "php": ">=5.2.0"
     },
