@@ -109,6 +109,16 @@ class NFe {
         return $response;
     }
 
+    function atualizarEmpresa( $data ) {
+        $response = self::connectWebmaniaBR( 'POST', 'https://webmaniabr.com/api/1/nfe/empresa/', $data);
+        return $response;
+    }
+
+    function exportarRelatorios( $data ) {
+        $response = self::connectWebmaniaBR( 'POST', 'https://webmaniabr.com/api/1/nfe/relatorios/', $data);
+        return $response;
+    }
+
     function connectWebmaniaBR( $request, $endpoint, $data ){
 
         // Verify cURL

@@ -102,6 +102,14 @@ statusSefaz(); // Verifica se o SEFAZ está Online ou Offline.
 validadeCertificado(); // Verifica se o Certificado A1 é válido e quantos dias faltam para expirar.
 ```
 
+```php
+atualizarEmpresa(); // Atualiza os dados da empresa
+```
+
+```php
+exportarRelatorios(); // Exporta relatórios de acordo com os parâmetros informados.
+```
+
 ## Suporte
 
 Qualquer dúvida entre em contato na nossa [Central de Ajuda](https://ajuda.webmaniabr.com) ou acesse o [Painel de Controle](https://webmaniabr.com/painel/) para conversar em tempo real no Chat ou Abrir um chamado.
