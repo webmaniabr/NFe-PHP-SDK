@@ -13,19 +13,30 @@ use WebmaniaBR\NFe;
 * de uso. Caso já tenha passado o prazo de 24 horas ou já tenha ocorrido a circulação da
 * mercadoria, emita uma NF-e de devolução para anular a NF-e anterior.
 */
-$chave = '00000000000000000000000000000000000000000000';
+$chave_uuid = '00000000000000000000000000000000000000000000'; // Chave ou UUID
 $motivo = 'Exemplo: Cancelamento por motivos administrativos.';
 
 /**
 * Solicitação do cancelamento
 */
 $webmaniabr = new NFe('SEU_CONSUMER_KEY', 'SEU_CONSUMER_SECRET', 'SEU_ACCESS_TOKEN', 'SEU_ACCESS_TOKEN_SECRET');
-$response = $webmaniabr->cancelarNotaFiscal( $chave, $motivo );
+$response = $webmaniabr->cancelarNotaFiscal( $chave_uuid, $motivo );
 
 /**
 * Retorno
 */
-if (isset($response->error)){
+if (!isset($response->error)){
+
+  echo '<h2>Resultado do Cancelamento:</h2>';
+
+  $status = (string) $response->status;
+  $xml = (string) $response->xml;
+  $log = $response->log;
+
+  print_r($response);
+  exit();
+
+} else {
 
   echo '<h2>Erro: '.$response->error.'</h2>';
 
@@ -44,17 +55,6 @@ if (isset($response->error)){
 
   }
 
-  exit();
-
-} else {
-
-  echo '<h2>Resultado do Cancelamento:</h2>';
-
-  $status = (string) $response->status;
-  $xml = (string) $response->xml;
-  $log = $response->log;
-
-  print_r($response);
   exit();
 
 }

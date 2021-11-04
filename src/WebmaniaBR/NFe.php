@@ -22,7 +22,7 @@ class NFe {
     function statusSefaz( $data = null ){
 
         $data = array();
-        $response = self::connectWebmaniaBR( 'GET', 'https://webmaniabr.com/api/1/nfe/sefaz/', $data );
+        $response = $this->connectWebmaniaBR( 'GET', 'https://webmaniabr.com/api/1/nfe/sefaz/', $data );
         if (isset($response->error)) return $response;
         if ($response->status == 'online') return true;
         else return false;
@@ -32,7 +32,7 @@ class NFe {
     function validadeCertificado( $data = null ){
 
         $data = array();
-        $response = self::connectWebmaniaBR( 'GET', 'https://webmaniabr.com/api/1/nfe/certificado/', $data );
+        $response = $this->connectWebmaniaBR( 'GET', 'https://webmaniabr.com/api/1/nfe/certificado/', $data );
         if (isset($response->error)) return $response;
         return $response->expiration;
 
@@ -40,83 +40,172 @@ class NFe {
 
     function emissaoNotaFiscal( array $data ){
 
-        $response = self::connectWebmaniaBR( 'POST', 'https://webmaniabr.com/api/1/nfe/emissao/', $data );
+        $response = $this->connectWebmaniaBR( 'POST', 'https://webmaniabr.com/api/1/nfe/emissao/', $data );
         return $response;
 
     }
 
-    function consultaNotaFiscal( $chave ){
+    function consultaNotaFiscal( $chave_uuid ){
 
-        $data = array();
-        $data['chave'] = $chave;
-        $response = self::connectWebmaniaBR( 'GET', 'https://webmaniabr.com/api/1/nfe/consulta/', $data );
+        $data = $this->validate_key_uuid( $chave_uuid );
+
+        if (is_object($data) && $data->error){
+            return $data->error;
+        } 
+
+        $response = $this->connectWebmaniaBR( 'GET', 'https://webmaniabr.com/api/1/nfe/consulta/', $data );
         return $response;
 
     }
 
-    function cancelarNotaFiscal( $chave, $motivo ){
+    function cancelarNotaFiscal( $chave_uuid, $motivo ){
 
-        $data = array();
-        $data['chave'] = $chave;
-        $data['motivo'] = $motivo;
-        $response = self::connectWebmaniaBR( 'PUT', 'https://webmaniabr.com/api/1/nfe/cancelar/', $data );
+        $data = $this->validate_key_uuid( $chave_uuid );
+
+        if (is_object($data) && $data->error){
+            return $data->error;
+        } 
+
+        $data = array(
+            key($data) => $data[key($data)],
+            'motivo' => $motivo
+        );
+
+        $response = $this->connectWebmaniaBR( 'PUT', 'https://webmaniabr.com/api/1/nfe/cancelar/', $data );
         return $response;
 
     }
 
-    function inutilizarNumeracao( $sequencia, $motivo, $ambiente ){
+    function inutilizarNumeracao( $sequencia, $motivo, $ambiente, $serie = '', $modelo = '' ){
 
-        $data = array();
-        $data['sequencia'] = $sequencia;
-        $data['motivo'] = $motivo;
-        $data['ambiente'] = $ambiente;
-        $response = self::connectWebmaniaBR( 'PUT', 'https://webmaniabr.com/api/1/nfe/inutilizar/', $data );
+        $data = array(
+            'sequencia' => $sequencia,
+            'motivo' => $motivo,
+            'ambiente' => $ambiente,
+            'serie' => $serie,
+            'modelo' => $modelo
+        );
+
+        $response = $this->connectWebmaniaBR( 'PUT', 'https://webmaniabr.com/api/1/nfe/inutilizar/', $data );
         return $response;
 
     }
 
-    function cartaCorrecao( $chave, $correcao ){
+    function cartaCorrecao( $chave_uuid, $correcao, $ambiente = '', $evento = '', $url_notificacao = '' ){
 
-        $data = array();
-        $data['chave'] = $chave;
-        $data['correcao'] = $correcao;
-        $response = self::connectWebmaniaBR( 'POST', 'https://webmaniabr.com/api/1/nfe/cartacorrecao/', $data );
+        $data = $this->validate_key_uuid( $chave_uuid );
+
+        if (is_object($data) && $data->error){
+            return $data->error;
+        } 
+
+        $data = array(
+            key($data) => $data[key($data)],
+            'correcao' => $correcao,
+            'ambiente' => $ambiente,
+            'evento' => $evento,
+            'url_notificacao' => $url_notificacao
+        );
+        
+        $response = $this->connectWebmaniaBR( 'POST', 'https://webmaniabr.com/api/1/nfe/cartacorrecao/', $data );
         return $response;
 
     }
 
-    function devolucaoNotaFiscal( $chave, $natureza_operacao, $ambiente, $codigo_cfop = null, $classe_imposto = null, $produtos = null ){
+    function devolucaoNotaFiscal( $chave_uuid, $natureza_operacao, $ambiente, $codigo_cfop = '', $classe_imposto = '', $produtos = array(), $volume = '', $informacoes_fisco = '', $informacoes_complementares = '', $url_notificacao = '' ){
 
-        $data = array();
-        $data['chave'] = $chave;
-        $data['natureza_operacao'] = $natureza_operacao;
-        $data['ambiente'] = $ambiente;
-        $data['codigo_cfop'] = $codigo_cfop;
-        $data['classe_imposto'] = $classe_imposto;
-        $data['produtos'] = $produtos;
-        $response = self::connectWebmaniaBR( 'POST', 'https://webmaniabr.com/api/1/nfe/devolucao/', $data );
+        $data = $this->validate_key_uuid( $chave_uuid );
+
+        if (is_object($data) && $data->error){
+            return $data->error;
+        } 
+
+        $data = array(
+            key($data) => $data[key($data)],
+            'natureza_operacao' => $natureza_operacao,
+            'ambiente' => $ambiente,
+            'codigo_cfop' => $codigo_cfop,
+            'classe_imposto' => $classe_imposto,
+            'produtos' => $produtos,
+            'volume' => $volume,
+            'informacoes_fisco' => $informacoes_fisco,
+            'informacoes_complementares' => $informacoes_complementares,
+            'url_notificacao' => $url_notificacao
+        );
+
+        $response = $this->connectWebmaniaBR( 'POST', 'https://webmaniabr.com/api/1/nfe/devolucao/', $data );
         return $response;
 
     }
 
     function ajusteNotaFiscal( $data ){
-        $response = self::connectWebmaniaBR( 'POST', 'https://webmaniabr.com/api/1/nfe/ajuste/', $data );
+
+        $response = $this->connectWebmaniaBR( 'POST', 'https://webmaniabr.com/api/1/nfe/ajuste/', $data );
         return $response;
+
     }
 
     function complementarNotaFiscal( $data ) {
-        $response = self::connectWebmaniaBR( 'POST', 'https://webmaniabr.com/api/1/nfe/nfe_referenciada/', $data);
+
+        $response = $this->connectWebmaniaBR( 'POST', 'https://webmaniabr.com/api/1/nfe/complementar/', $data);
         return $response;
+
     }
 
     function atualizarEmpresa( $data ) {
-        $response = self::connectWebmaniaBR( 'POST', 'https://webmaniabr.com/api/1/nfe/empresa/', $data);
+
+        $response = $this->connectWebmaniaBR( 'POST', 'https://webmaniabr.com/api/1/nfe/empresa/', $data);
         return $response;
+
     }
 
     function exportarRelatorios( $data ) {
-        $response = self::connectWebmaniaBR( 'POST', 'https://webmaniabr.com/api/1/nfe/relatorios/', $data);
+
+        $response = $this->connectWebmaniaBR( 'POST', 'https://webmaniabr.com/api/1/nfe/relatorios/', $data);
         return $response;
+
+    }
+
+    function manifestacaoDestinatario( $chave, $ambiente, $evento, $justificativa = '' ) {
+
+        $data = array(
+            'chave' => $chave,
+            'ambiente' => $ambiente,
+            'evento' => $evento,
+            'justificativa' => $justificativa
+        );
+
+        $response = $this->connectWebmaniaBR( 'POST', 'https://webmaniabr.com/api/1/nfe/manifesta/', $data);
+        return $response;
+
+    }
+
+    function classeImposto( $data = array(), $method = 'POST' ) {
+
+        $response = $this->connectWebmaniaBR( $method, 'https://webmaniabr.com/api/1/nfe/classe-imposto/', $data);
+        return $response;
+
+    }
+
+    function validate_key_uuid( $key_uuid ){
+
+        $data = [];
+
+        if (strlen(preg_replace("/[^0-9]/", '', $key_uuid)) == 44){
+            $data['chave'] = preg_replace("/[^0-9]/", '', $key_uuid);
+        } else if (strlen(trim($key_uuid)) == 36) {
+            $data['uuid'] = trim($key_uuid);
+        } else {
+            $response = new StdClass;
+            $response->error = 'Informado Chave ou UUID inválido.';
+        }
+
+        if ($data){
+            return $data;
+        } else {
+            return $response;
+        }
+
     }
 
     function connectWebmaniaBR( $request, $endpoint, $data ){

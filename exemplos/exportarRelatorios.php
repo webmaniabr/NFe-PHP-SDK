@@ -13,8 +13,7 @@ $data = array(
     'modelo' => 'nfe', // Modelo da Nota Fiscal (nfe, nfce, cce)
     'relatorio' => 'xml', // Relatório a ser exportado (csv, xml, danfe)
     'status' => 'emitidas', // Filtrar status das Notas Fiscais (emitidas, canceladas, denegadas, inutilizadas)
-    'url_notificacao' => 'http://meudominio.com/retorno.php', // URL de notificação com retorno da URL para download do Relatório
-    'ambiente' => '2'
+    'url_notificacao' => 'http://meudominio.com/retorno.php' // URL de notificação com retorno da URL para download do Relatório
 );
 
 // Solicita a exportação dos relatórios
@@ -22,28 +21,7 @@ $webmaniabr = new NFe('SEU_CONSUMER_KEY', 'SEU_CONSUMER_SECRET', 'SEU_ACCESS_TOK
 $response = $webmaniabr->exportarRelatorios( $data );
 
 // Retorno
-if (isset($response->error)){
-
-    echo '<h2>Erro: '.$response->error.'</h2>';
-
-    if (isset($response->log)){
-
-        echo '<h2>Log:</h2>';
-        echo '<ul>';
-
-        foreach ($response->log as $erros){
-            foreach ($erros as $erro) {
-                echo '<li>'.$erro.'</li>';
-            }
-        }
-
-        echo '</ul>';
-
-    }
-
-    exit();
-
-} else {
+if (!isset($response->error)){
 
     $uuid = (string) $response->uuid; // Número único de identificação da Nota Fiscal
     $status = (string) $response->status; // processando ou concluido
@@ -69,6 +47,27 @@ if (isset($response->error)){
     }
 
     print_r($response);
+    exit();
+
+} else {
+
+    echo '<h2>Erro: '.$response->error.'</h2>';
+
+    if (isset($response->log)){
+
+        echo '<h2>Log:</h2>';
+        echo '<ul>';
+
+        foreach ($response->log as $erros){
+            foreach ($erros as $erro) {
+                echo '<li>'.$erro.'</li>';
+            }
+        }
+
+        echo '</ul>';
+
+    }
+
     exit();
 
 }

@@ -3,14 +3,26 @@ header('Content-Type: text/html; charset=utf-8');
 require_once __DIR__.'/../src/WebmaniaBR/NFe.php';
 use WebmaniaBR\NFe;
 
-$sequencia = '101-109';
+$sequencia = '101-109'; // Sequência da numeração
 $motivo = 'Cancelamento por motivos administrativos.';
 $ambiente = '2'; // 1 - Produção ou 2 - Homologação
-
+$serie = '1'; // Série da numeração
+$modelo = '1'; // Modelo da numeração
+ 
 $webmaniabr = new NFe('SEU_CONSUMER_KEY', 'SEU_CONSUMER_SECRET', 'SEU_ACCESS_TOKEN', 'SEU_ACCESS_TOKEN_SECRET');
-$response = $webmaniabr->inutilizarNumeracao( $sequencia, $motivo, $ambiente );
+$response = $webmaniabr->inutilizarNumeracao( $sequencia, $motivo, $ambiente, $serie, $modelo );
 
-if (isset($response->error)){
+if (!isset($response->error)){
+
+    echo '<h2>Resultado da Inutilização:</h2>';
+
+    $xml = (string) $response->xml;
+    $log = $response->log;
+
+    print_r($response);
+    exit();
+
+} else {
 
     echo '<h2>Erro: '.$response->error.'</h2>';
 
@@ -29,16 +41,6 @@ if (isset($response->error)){
 
     }
 
-    exit();
-
-} else {
-
-    echo '<h2>Resultado da Inutilização:</h2>';
-
-    $xml = (string) $response->xml;
-    $log = $response->log;
-
-    print_r($response);
     exit();
 
 }

@@ -7,7 +7,7 @@ use WebmaniaBR\NFe;
  * Atualizar dados da empresa
  *
  * Atenção: As informações da sua empresa devem ser igual
-ao Cadastro Nacional da Pessoa Jurídica da Receita Federal.
+ * ao Cadastro Nacional da Pessoa Jurídica da Receita Federal.
  */
 
 $data = array(
@@ -27,7 +27,15 @@ $webmaniabr = new NFe('SEU_CONSUMER_KEY', 'SEU_CONSUMER_SECRET', 'SEU_ACCESS_TOK
 $response = $webmaniabr->atualizarEmpresa( $data );
 
 // Retorno
-if (isset($response->error)){
+if (!isset($response->error)){
+
+    $sucess = (string) $response->success;
+
+    echo "<h2>Resultado da atualização: {$sucess}</h2>";
+
+    exit();
+
+} else {
 
     echo '<h2>Erro: '.$response->error.'</h2>';
 
@@ -45,14 +53,6 @@ if (isset($response->error)){
         echo '</ul>';
 
     }
-
-    exit();
-
-} else {
-
-    $sucess = (string) $response->success;
-
-    echo "<h2>Resultado da atualização: {$sucess}</h2>";
 
     exit();
 

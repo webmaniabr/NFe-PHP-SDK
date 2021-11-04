@@ -12,16 +12,11 @@ use WebmaniaBR\NFe;
  * porque este procedimento é realizado de forma automática em todos os endpoints.
  */
 $webmaniabr = new NFe('SEU_CONSUMER_KEY', 'SEU_CONSUMER_SECRET', 'SEU_ACCESS_TOKEN', 'SEU_ACCESS_TOKEN_SECRET');
-$response = $webmaniabr->statusSefaz();
+$status = $webmaniabr->statusSefaz();
 
-if (isset($response->error)){
+if (!isset($status->error)){
 
-    echo '<h2>Erro: '.$response->error.'</h2>';
-    exit();
-
-} else {
-
-    if ($response){
+    if ($status){
 
         echo '<h2>Sefaz: Online</h2>';
 
@@ -30,5 +25,10 @@ if (isset($response->error)){
         echo '<h2>Sefaz: Offline</h2>';
 
     }
+
+} else {
+
+    echo '<h2>Erro: '.$status->error.'</h2>';
+    exit();
 
 }

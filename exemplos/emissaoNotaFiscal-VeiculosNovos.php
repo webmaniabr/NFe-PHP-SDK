@@ -87,42 +87,45 @@ $webmaniabr = new NFe('SEU_CONSUMER_KEY', 'SEU_CONSUMER_SECRET', 'SEU_ACCESS_TOK
 $response = $webmaniabr->emissaoNotaFiscal( $data );
 
 // Retorno
-if (isset($response->error)){
+if (!isset($response->error)){
 
-    echo '<h2>Erro: '.$response->error.'</h2>';
+  echo '<h2>NF-e enviada com sucesso.</h2>';
 
-    if (isset($response->log)){
+  $uuid = (string) $response->uuid; // Número único de identificação da Nota Fiscal
+  $status = (string) $response->status; // aprovado, reprovado, cancelado, processamento ou contingencia
+  $motivo = (string) $response->motivo; // Motivo do status
+  $nfe = (int) $response->nfe; // Número da NF-e
+  $serie = (int) $response->serie; // Número de série
+  $modelo = (string) $response->modelo; // Modelo da Nota Fiscal (nfe, nfce, cce)
+  $recibo = (int) $response->recibo; // Número do recibo
+  $chave = (string)$response->chave; // Número da chave de acesso
+  $xml = (string) $response->xml; // URL do XML
+  $danfe = (string) $response->danfe; // URL do Danfe (PDF)
+  $danfe_simples = (string) $response->danfe_simples; // URL do Danfe Simples (PDF)
+  $danfe_etiqueta = (string) $response->danfe_etiqueta; // URL do Danfe Simplificada - Etiqueta (PDF)
+  $log = $response->log; // Log do Sefaz
 
-        echo '<h2>Log:</h2>';
-        echo '<ul>';
-
-        foreach ($response->log as $erros){
-            foreach ($erros as $erro) {
-                echo '<li>'.$erro.'</li>';
-            }
-        }
-
-        echo '</ul>';
-
-    }
-
-    exit();
+  print_r($response);
 
 } else {
 
-    echo '<h2>NF-e enviada com sucesso.</h2>';
+  echo '<h2>Erro: '.$response->error.'</h2>';
 
-    $uuid = (string) $response->uuid; // Número único de identificação da Nota Fiscal
-    $status = (string) $response->status; // aprovado, reprovado, cancelado, processamento ou contingencia
-    $nfe = (int) $response->nfe; // Número da NF-e
-    $serie = (int) $response->serie; // Número de série
-    $recibo = (int) $response->recibo; // Número do recibo
-    $chave = $response->chave; // Número da chave de acesso
-    $xml = (string) $response->xml; // URL do XML
-    $danfe = (string) $response->danfe; // URL do Danfe (PDF)
-    $log = $response->log; // Log do Sefaz
+  if (isset($response->log)){
 
-    print_r($response);
-    exit();
+      echo '<h2>Log:</h2>';
+      echo '<ul>';
+
+      foreach ($response->log as $erros){
+          foreach ($erros as $erro) {
+              echo '<li>'.$erro.'</li>';
+          }
+      }
+
+      echo '</ul>';
+
+  }
+
+  exit();
 
 }

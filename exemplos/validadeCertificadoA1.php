@@ -6,12 +6,7 @@ use WebmaniaBR\NFe;
 $webmaniabr = new NFe('SEU_CONSUMER_KEY', 'SEU_CONSUMER_SECRET', 'SEU_ACCESS_TOKEN', 'SEU_ACCESS_TOKEN_SECRET');
 $response = $webmaniabr->validadeCertificado();
 
-if (isset($response->error)){
-
-    echo '<h2>Erro: '.$response->error.'</h2>';
-    exit();
-
-} else {
+if (!isset($response->error)){
 
     if ($response > 45){
 
@@ -26,5 +21,10 @@ if (isset($response->error)){
         echo '<h2>Certificado Digital A1 vencido. Emita um novo para continuar operando.</h2>';
 
     }
+
+} else {
+
+    echo '<h2>Erro: '.$response->error.'</h2>';
+    exit();
 
 }

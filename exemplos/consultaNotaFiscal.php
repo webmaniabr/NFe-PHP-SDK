@@ -10,23 +10,18 @@ use WebmaniaBR\NFe;
 * emissor da WebmaniaBR, não sendo possível consultar nota fiscal de terceiro
 * ou emitida em outro sistema.
 */
-$chave = '00000000000000000000000000000000000000000000';
+$chave_uuid = '00000000000000000000000000000000000000000000'; // Chave ou UUID
 
 /**
 * Solicitação da consulta
 */
 $webmaniabr = new NFe('SEU_CONSUMER_KEY', 'SEU_CONSUMER_SECRET', 'SEU_ACCESS_TOKEN', 'SEU_ACCESS_TOKEN_SECRET');
-$response = $webmaniabr->consultaNotaFiscal( $chave );
+$response = $webmaniabr->consultaNotaFiscal( $chave_uuid );
 
 /**
 * Retorno
 */
-if (isset($response->error)){
-
-  echo '<h2>Erro: '.$response->error.'</h2>';
-  exit();
-
-} else {
+if (!isset($response->error)){
 
   echo '<h2>Resultado da Consulta:</h2>';
 
@@ -41,6 +36,11 @@ if (isset($response->error)){
   $log = $response->log; // Log do Sefaz
 
   print_r($response);
+  exit();
+
+} else {
+
+  echo '<h2>Erro: '.$response->error.'</h2>';
   exit();
 
 }

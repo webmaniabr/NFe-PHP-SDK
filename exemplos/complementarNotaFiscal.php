@@ -71,7 +71,25 @@ $webmaniabr = new NFe('SEU_CONSUMER_KEY', 'SEU_CONSUMER_SECRET', 'SEU_ACCESS_TOK
 $response = $webmaniabr->complementarNotaFiscal( $data );
 
 //Retorno
-if (isset($response->error)){
+if (!isset($response->error)){
+
+    echo '<h2>NF-e complementar enviada com sucesso.</h2>';
+
+    $uuid = (string) $response->uuid; // Número único de identificação da Nota Fiscal
+    $status = (string) $response->status; // aprovado, reprovado, cancelado, processamento ou contingencia
+    $nfe = (int) $response->nfe; // Número da NF-e
+    $serie = (int) $response->serie; // Número de série
+    $recibo = (int) $response->recibo; // Número do recibo
+    $chave = $response->chave; // Número da chave de acesso
+    $xml = (string) $response->xml; // URL do XML
+    $danfe = (string) $response->danfe; // URL do Danfe (PDF)
+    $log = $response->log; // Log do Sefaz
+
+    print_r($response);
+    exit();
+
+} else {
+
     echo '<h2>Erro: '.$response->error.'</h2>';
 
     if (isset($response->log)){
@@ -87,23 +105,6 @@ if (isset($response->error)){
         echo '</ul>';
     }
 
-    exit();
-
-}else{
-
-    echo '<h2>NF-e complementar enviada com sucesso.</h2>';
-
-    $uuid = (string) $response->uuid; // Número único de identificação da Nota Fiscal
-    $status = (string) $response->status; // aprovado, reprovado, cancelado, processamento ou contingencia
-    $nfe = (int) $response->nfe; // Número da NF-e
-    $serie = (int) $response->serie; // Número de série
-    $recibo = (int) $response->recibo; // Número do recibo
-    $chave = $response->chave; // Número da chave de acesso
-    $xml = (string) $response->xml; // URL do XML
-    $danfe = (string) $response->danfe; // URL do Danfe (PDF)
-    $log = $response->log; // Log do Sefaz
-
-    print_r($response);
     exit();
 
 }
