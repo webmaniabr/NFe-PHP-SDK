@@ -11,9 +11,17 @@ Através do emissor de Nota Fiscal da WebmaniaBR®, você conta com a emissão e
 
 ## Requisitos
 
-- Contrate um dos planos de Nota Fiscal Eletrônica da WebmaniaBR® a partir de R$32,90/mês: [Assine agora mesmo](https://webmaniabr.com/nota-fiscal-eletronica/).
-- [Composer](https://getcomposer.org/)
+- Contrate um dos planos de Nota Fiscal Eletrônica da WebmaniaBR® a partir de R$32,90/mês: [Teste 30 dias grátis!](https://webmaniabr.com/nota-fiscal-eletronica/).
+- Instale o [Composer](https://getcomposer.org/)
 - Realize a integração com o seu sistema.
+
+## Endpoints
+
+A SDK está disponível para todos os recursos da versão **3.7.0** da API de Nota Fiscal [(changelog)](https://ajuda.webmaniabr.com/hc/pt-br/articles/360013266171).
+
+<p align="center">
+  <img src="https://wmbr.s3.amazonaws.com/img/endpoints_nfe_nfce.jpg">
+</p>
 
 ## Utilização
 Instale o módulo da WebmaniaBR® via composer ou baixe nosso repositório e utilize a classe NFe.php que se encontra dentro de src/WebmaniaBR/:
@@ -48,11 +56,7 @@ Para emitir uma NF-e por exemplo, deve ser utilizado o método ``` emissaoNotaFi
 ```php
 $response = $this->webmaniabr->emissaoNotaFiscal( $data );
 
-if($response->error) {
-
-   echo 'Ocorreu um erro: ' . $resp->error;
-
-}else{
+if (!$response->error) {
 
     echo $response->uuid; // Número único de identificação da Nota Fiscal
     echo $response->status; // aprovado, reprovado, cancelado, processamento ou contingencia
@@ -64,50 +68,11 @@ if($response->error) {
     echo $response->danfe; // URL do Danfe (PDF)
     echo $response->log; // Log do Sefaz
 
+} else {
+
+    echo 'Ocorreu um erro: ' . $resp->error;
+
 }
-```
-
-Onde ``` $data ``` é um array com os dados da Nota Fiscal a ser emitida, para maiores informações quais dados devem ser enviados, consulte a [documentação](https://webmaniabr.com/docs/rest-api-nfe/#emitir-nfe).
-
-Verifique todos os exemplos de utilização no diretório /exemplos/. Segue abaixo uma listagem dos métodos existentes em nossa SDK e os devidos parâmetros que devem ser informados:
-
-```php
-ajusteNotaFiscal( $array ); // Emite uma nota fiscal de ajuste.
-```
-```php
-cancelarNotaFiscal( $chave, $motivo ); // Cancelar Nota Fiscal enviada ao SEFAZ.
-```
-```php
-cartaCorrecao(  $chave, $correcao  ); // Corrigir uma Nota Fiscal junto ao SEFAZ.
-```
-```php
-complementarNotaFiscal( $array ); // Emite uma Nota Fiscal complementar.
-```
-```php
-consultaNotaFiscal( $chave ); // Consulta o status da Nota Fiscal enviada para o SEFAZ.
-```
-```php
-devolucaoNotaFiscal( $chave, $natureza_operacao, $ambiente, $codigo_cfop, $classe_imposto, $produtos ); // Emissão de Nota Fiscal de devolução junto ao SEFAZ.
-```
-```php
-emissaoNotaFiscal( $array ); // Emissão da Nota Fiscal junto ao SEFAZ, com exemplos para a emissão com detalhamento específicos.
-```
-```php
-inutilizarNumeracao( $sequencia, $motivo, $ambiente ); // Inutilizar sequência de numeração junto ao SEFAZ.
-```
-```php
-statusSefaz(); // Verifica se o SEFAZ está Online ou Offline.
-```
-```php
-validadeCertificado(); // Verifica se o Certificado A1 é válido e quantos dias faltam para expirar.
-```
-
-```php
-atualizarEmpresa(); // Atualiza os dados da empresa
-```
-
-```php
-exportarRelatorios(); // Exporta relatórios de acordo com os parâmetros informados.
 ```
 
 ## Suporte
