@@ -112,7 +112,7 @@ class NFe {
 
     }
 
-    function devolucaoNotaFiscal( $chave_uuid, $natureza_operacao, $ambiente, $codigo_cfop = '', $classe_imposto = '', $produtos = array(), $volume = '', $informacoes_fisco = '', $informacoes_complementares = '', $url_notificacao = '' ){
+    function devolucaoNotaFiscal( $chave_uuid, $natureza_operacao, $ambiente, $codigo_cfop = '', $classe_imposto = '', $produtos = array(), $quantidade = array(), $volume = '', $informacoes_fisco = '', $informacoes_complementares = '', $url_notificacao = '' ){
 
         $data = $this->validate_key_uuid( $chave_uuid );
 
@@ -127,6 +127,7 @@ class NFe {
             'codigo_cfop' => $codigo_cfop,
             'classe_imposto' => $classe_imposto,
             'produtos' => $produtos,
+            'quantidade'=> $quantidade,
             'volume' => $volume,
             'informacoes_fisco' => $informacoes_fisco,
             'informacoes_complementares' => $informacoes_complementares,
