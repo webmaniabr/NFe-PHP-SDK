@@ -10,12 +10,35 @@ class NFe {
     private $accessToken        = "";
     private $accessTokenSecret  = "";
 
-    function __construct( $consumer_key, $consumer_secret, $access_token, $acccess_token_secret ){
+    private $timeout            = 300;
+    private $timeoutRapido      = 5;
+
+    function __construct( $consumer_key, $consumer_secret, $access_token, $acccess_token_secret, $timeout = 300, $timeoutRapido = 5 ){
 
         $this->consumerKey = $consumer_key;
         $this->consumerSecret = $consumer_secret;
         $this->accessToken = $access_token;
         $this->accessTokenSecret = $acccess_token_secret;
+
+        $this->timeout = $timeout;
+        $this->timeoutRapido = $timeoutRapido;
+
+    }
+
+    /**
+     * Permite customizar o timeout (em segundos) das chamadas à API, seja para
+     * ajustá-lo após a construção do objeto ou para reduzir a espera em caso
+     * de indisponibilidade da WebmaniaBR/SEFAZ.
+     *
+     * @param int $timeout Timeout (connect e total) para os endpoints padrão (emissão, cancelamento, etc). Padrão: 300.
+     * @param int|null $timeoutRapido Timeout para os endpoints de status (/sefaz/, /certificado/). Se omitido, mantém o valor atual. Padrão: 5.
+     */
+    function setTimeout( $timeout, $timeoutRapido = null ){
+
+        $this->timeout = $timeout;
+        if ( $timeoutRapido !== null ) {
+            $this->timeoutRapido = $timeoutRapido;
+        }
 
     }
 
@@ -221,17 +244,18 @@ class NFe {
         }
 
         // Set limits
-        @set_time_limit( 300 );
-        ini_set('max_execution_time', 300);
-        ini_set('max_input_time', 300);
+        $limiteExecucao = max( $this->timeout, $this->timeoutRapido );
+        @set_time_limit( $limiteExecucao );
+        ini_set('max_execution_time', $limiteExecucao);
+        ini_set('max_input_time', $limiteExecucao);
         ini_set('memory_limit', '256M');
         if (
             strpos($endpoint, '/sefaz/') !== false ||
             strpos($endpoint, '/certificado/') !== false
         ){
-            $timeout = 5;
+            $timeout = $this->timeoutRapido;
         } else {
-            $timeout = 300;
+            $timeout = $this->timeout;
         }
 
         // Header
